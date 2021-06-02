@@ -9,31 +9,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import klinz.hrms.business.abstracts.JobTitleService;
+
+import klinz.hrms.business.abstracts.EmployerService;
 import klinz.hrms.core.utilities.results.DataResult;
 import klinz.hrms.core.utilities.results.Result;
-import klinz.hrms.entities.concretes.JobTitle;
+import klinz.hrms.entities.concretes.Employer;
+import klinz.hrms.entities.dtos.EmployerForRegisterDto;
 
 @RestController
-@RequestMapping("/api/jobtitles")
-public class JobTitlesController {
+@RequestMapping("/api/employers")
+public class EmployersController {
 	
-	private JobTitleService jobTitleService;
+	private EmployerService employerService;
 
 	@Autowired
-	public JobTitlesController(JobTitleService jobTitleService) {
+	public EmployersController(EmployerService employerService) {
 		super();
-		this.jobTitleService = jobTitleService;
+		this.employerService = employerService;
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobTitle jobTame) {
-		return this.jobTitleService.add(jobTame);
+	public Result add(@RequestBody EmployerForRegisterDto employerForRegisterDto) {
+		return this.employerService.add(employerForRegisterDto);
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<JobTitle>> getAll() {
-		return this.jobTitleService.getAll();
+	public DataResult<List<Employer>> getAll() {
+		return this.employerService.getAll();
 	}
-	
 }
