@@ -29,8 +29,6 @@ public class UsersController {
 		return this.userService.activateUser(userId);
 	}
 	
-	
-	
 	@GetMapping("/getAll")
 	public DataResult<List<User>> getAll() {
 		return this.userService.getAll();

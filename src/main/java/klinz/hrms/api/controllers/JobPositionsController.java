@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import klinz.hrms.business.abstracts.JobTitleService;
+import klinz.hrms.business.abstracts.JobPositionService;
 import klinz.hrms.core.utilities.results.DataResult;
 import klinz.hrms.core.utilities.results.Result;
-import klinz.hrms.entities.concretes.JobTitle;
+import klinz.hrms.entities.concretes.JobPosition;
 
 @RestController
-@RequestMapping("/api/jobtitles")
-public class JobTitlesController {
+@RequestMapping("/api/jobpositions")
+public class JobPositionsController {
 	
-	private JobTitleService jobTitleService;
+	private JobPositionService jobPositionService;
 
 	@Autowired
-	public JobTitlesController(JobTitleService jobTitleService) {
+	public JobPositionsController(JobPositionService jobPositionService) {
 		super();
-		this.jobTitleService = jobTitleService;
+		this.jobPositionService = jobPositionService;
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobTitle jobTame) {
-		return this.jobTitleService.add(jobTame);
+	public Result add(@RequestBody JobPosition jobPosition) {
+		return this.jobPositionService.add(jobPosition);
 	}
 	
 	@GetMapping("/getAll")
-	public DataResult<List<JobTitle>> getAll() {
-		return this.jobTitleService.getAll();
+	public DataResult<List<JobPosition>> getAll() {
+		return this.jobPositionService.getAll();
 	}
 	
 }
