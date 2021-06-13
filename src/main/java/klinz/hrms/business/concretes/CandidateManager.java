@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import klinz.hrms.business.abstracts.CandidateService;
-import klinz.hrms.business.abstracts.MailService;
+import klinz.hrms.core.abstracts.MailService;
 import klinz.hrms.core.abstracts.PersonCheckService;
 import klinz.hrms.core.utilities.business.BusinessRules;
 import klinz.hrms.core.utilities.results.DataResult;
@@ -28,7 +29,7 @@ public class CandidateManager implements CandidateService{
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao, PersonCheckService personCheckService, MailService mailService, ModelMapper modelMapper) {
+	public CandidateManager(CandidateDao candidateDao, @Qualifier("fakeMernisAdapter") PersonCheckService personCheckService, MailService mailService, ModelMapper modelMapper) {
 		super();
 		this.candidateDao = candidateDao;
 		this.personCheckService = personCheckService;
@@ -48,7 +49,7 @@ public class CandidateManager implements CandidateService{
 		}
 		
 		if (this.personCheckService.checkIfRealPerson(candidate)) {
-			this.mailService.sendActivationCode(candidate.getEmail());
+			this.mailService.sendMail(candidate.getEmail(), "Fake Activation (Temp)");
 			this.candidateDao.save(candidate);
 			return new SuccessResult("User is saved");
 		}
@@ -58,6 +59,12 @@ public class CandidateManager implements CandidateService{
 	@Override
 	public DataResult<List<Candidate>> getAll() {
 		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll(), "Candidates listed");
+	}
+	
+
+	@Override
+	public DataResult<Candidate> getById(int candidateId) {
+		return new SuccessDataResult<Candidate>(this.candidateDao.getById(candidateId), "Candidate listed");
 	}
 	
 	@Override
@@ -98,4 +105,5 @@ public class CandidateManager implements CandidateService{
 		}
 		return new SuccessResult("Validation successfull");
 	}
+
 }

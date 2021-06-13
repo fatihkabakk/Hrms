@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name="activation_codes")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class ActivationCode {
 	//Will be used later...
 	@Id
@@ -29,8 +26,8 @@ public class ActivationCode {
 	@Column(name="user_id")
 	private int userId;
 	
-	@Column(name="email_activation_code")
-	private String emailActivationCode;
+	@Column(name="activation_code")
+	private String activationCode;
 	
 	@Column(name="is_email_confirmed")
 	private boolean isEmailConfirmed;

@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -33,6 +36,14 @@ public class HrmsApplication {
         modelMapper.getConfiguration()
             .setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
+    }
+	
+	@Bean
+    public Cloudinary cloudinaryService(){
+        return new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "dqblylp6q",
+                "api_key", "547576216125218",
+                "api_secret", "LDpEpHFqU8Igb35CW9cxfyDM09I"));
     }
 
 }

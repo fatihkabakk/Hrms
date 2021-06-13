@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import klinz.hrms.core.abstracts.PersonCheckService;
 import klinz.hrms.entities.concretes.Candidate;
 
-@Service
+@Service("fakeMernisAdapter")
 public class FakeMernisAdapter implements PersonCheckService {
 
 	@Override

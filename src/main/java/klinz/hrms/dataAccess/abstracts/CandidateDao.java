@@ -6,5 +6,6 @@ import klinz.hrms.entities.concretes.Candidate;
 
 public interface CandidateDao extends JpaRepository<Candidate, Integer>{
 	Candidate getByEmail(String email);
+	Candidate getById(int candidateId);
 	Candidate getByIdentityNumber(String identityNumber);
 }

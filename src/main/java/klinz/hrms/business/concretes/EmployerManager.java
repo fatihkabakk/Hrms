@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import klinz.hrms.business.abstracts.EmployerService;
-import klinz.hrms.business.abstracts.MailService;
+import klinz.hrms.core.abstracts.MailService;
 import klinz.hrms.core.utilities.business.BusinessRules;
 import klinz.hrms.core.utilities.results.DataResult;
 import klinz.hrms.core.utilities.results.ErrorResult;
@@ -45,7 +45,7 @@ public class EmployerManager implements EmployerService {
 			return result;
 		}
 		
-		this.mailService.sendActivationCode(employer.getEmail());
+		this.mailService.sendMail(employer.getEmail(), "Fake Activation (Temp)");
 		this.employerDao.save(employer);
 		return new SuccessResult("Employer is saved");
 	
